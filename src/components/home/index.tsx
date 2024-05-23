@@ -1,24 +1,39 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+// interface
+interface filesType{
+    name:string,
+    date: string
+}
 
 // import css
 import './home.css'
 
 export const Home = () => {
 
-    const [files, setFiles] = useState([
-        {
-            name:'testes',
-            date: new Date()
+    // Buscando files na localStorage
+    useEffect(() => {
+        if(localStorage.getItem('files') !== null){
+            const filesLocalStorage = JSON.parse(localStorage.getItem('files') as string)
+
+            setFiles(filesLocalStorage)
         }
-    ])
+
+    },[])
+
+    // files - state
+    const [files, setFiles] = useState<filesType[]>()
 
     return(
         <section id="section__home">
-            {files.length > 0 && files.map((item, idx) => {
+            {files ? files.map((item, idx) => {
                 return(
-                    <div key={idx}>{item.name}</div>
+                    <div key={idx} className="files">
+                        <p>{item.name}</p>
+                        <p>Create in {item.date}</p>
+                    </div>
                 )
-            })}
+            }) : <h1>Nao tem nenhum file</h1>}
         </section>
     )
 }
