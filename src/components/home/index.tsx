@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 
+// import icons
+import { Heart, Trash2 } from 'lucide-react'
+
 // interface
 interface filesType{
     name:string,
@@ -22,15 +25,34 @@ export const Home = () => {
     },[])
 
     // files - state
-    const [files, setFiles] = useState<filesType[]>()
+    const [files, setFiles] = useState<filesType[]>([])
+
+    // deleteFile
+    function deleteFile(index:number){
+        // Removendo file
+        files?.splice(index,1)
+
+        // Salvando alteracoes
+        setFiles([...files])
+
+        // salvando na localStorage
+        localStorage.setItem('files', JSON.stringify(files))
+    }
 
     return(
         <section id="section__home">
-            {files ? files.map((item, idx) => {
+            {files.length > 0 ? files.map((item, idx) => {
                 return(
                     <div key={idx} className="files">
-                        <p>{item.name}</p>
-                        <p>Create in {item.date}</p>
+                        <div>
+                            <p>{item.name}</p>
+                            <p>Create in {item.date}</p>
+                        </div>
+
+                        <div className="files__interaction">
+                            <Heart color="white"/>
+                            <Trash2 color="white" onClick={() => deleteFile(idx)}/>
+                        </div>
                     </div>
                 )
             }) : <h1>Nao tem nenhum file</h1>}
