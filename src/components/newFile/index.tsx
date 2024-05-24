@@ -17,16 +17,16 @@ export const NewFile = () => {
         e.preventDefault()
         
         // Logica da localStorage
-        const myArr = localStorage.getItem('files') !== null ? JSON.parse(localStorage.getItem('files') as string) : []
+        const myArrFiles = localStorage.getItem('files') !== null ? JSON.parse(localStorage.getItem('files') as string) : []
         
         // Jogando o novo file para o array de files
-        myArr.push({
+        myArrFiles.push({
             name:value,
             date: Date.now()
         })
 
         // Salvar na localStorage
-        localStorage.setItem('files', JSON.stringify(myArr))
+        localStorage.setItem('files', JSON.stringify(myArrFiles))
         
         // Resetando a state value ao valor inicial
         setValue('')
