@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Componentes
-import { Header } from "../components/Header";
-import { Home } from "../components/Home";
-import { NewFile } from "../components/NewFile";
+import { Header } from "../Components/Header";
+import { Home } from "../Components/Home";
+import { NewFile } from "../Components/NewFile";
 
 export const RoutesPage = () => {
     return(
