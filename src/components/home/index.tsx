@@ -3,7 +3,8 @@ import { useCallback, useEffect, useState } from "react"
 // interface
 interface filesType{
     name:string,
-    date: number
+    date: number,
+    isFavorite:boolean
 }
 
 // Post Component
@@ -39,6 +40,18 @@ export const Home = () => {
             localStorage.setItem('files', JSON.stringify(files)) 
     },[files])
 
+    // favoriteFile
+    const updateValueIsFavoriteInFile = useCallback((index:number) => {
+        // logica para alterar o valor do favorite
+        files[index].isFavorite ? files[index].isFavorite = false : files[index].isFavorite = true 
+
+        // Salvando na localStorage
+        setFiles([...files])
+
+        // localStorage
+        localStorage.setItem('files', JSON.stringify(files))
+    },[files])
+
     return(
         <section id="section__home">
             {
@@ -47,7 +60,9 @@ export const Home = () => {
                         <Post 
                             key={idx}
                             nameFile={file.name} 
-                            dateFile={file.date } 
+                            dateFile={file.date}
+                            isFavorite={file.isFavorite}
+                            updateValueIsFavoriteInFile={() => updateValueIsFavoriteInFile(idx)} 
                             deleteFile={() => deleteFile(idx)}
                         />
                     )

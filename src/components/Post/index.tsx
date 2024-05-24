@@ -5,14 +5,16 @@ import { Heart, Trash2 } from 'lucide-react'
 type PostProps = {
     nameFile:string,
     dateFile:number,
-    deleteFile: () => void
+    isFavorite:boolean,
+    deleteFile: () => void,
+    updateValueIsFavoriteInFile: () => void
 }
 
 // date-fns
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
-export const Post = ({ nameFile, dateFile, deleteFile }:PostProps) => {
+export const Post = ({ nameFile, dateFile, isFavorite, deleteFile, updateValueIsFavoriteInFile }:PostProps) => {
 
     const dateFormated = formatDistanceToNow(dateFile,{locale:ptBR, addSuffix:true})
 
@@ -24,7 +26,7 @@ export const Post = ({ nameFile, dateFile, deleteFile }:PostProps) => {
             </div>
 
             <div className="files__interaction">
-                <Heart color="white"/>
+                <Heart color={isFavorite ? 'red' : 'white'} onClick={updateValueIsFavoriteInFile}/>
                 <Trash2 color="white" onClick={deleteFile}/>
             </div>
         </div>

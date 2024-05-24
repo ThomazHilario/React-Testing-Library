@@ -19,7 +19,8 @@ export const NewFile = () => {
         // Jogando o novo file para o array de files
         myArrFiles.push({
             name:value,
-            date: Date.now()
+            date: Date.now(),
+            isFavorite:false
         })
 
         // Salvar na localStorage
