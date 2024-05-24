@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 // interface
 interface filesType{
@@ -28,16 +28,16 @@ export const Home = () => {
     const [files, setFiles] = useState<filesType[]>([])
 
     // deleteFile
-    function deleteFile(index:number){
-        // Removendo file
-        files?.splice(index,1)
-
-        // Salvando alteracoes
-        setFiles([...files])
-
-        // salvando na localStorage
-        localStorage.setItem('files', JSON.stringify(files))
-    }
+    const deleteFile = useCallback((index:number) => {  
+            // Removendo file
+            files?.splice(index,1)
+    
+            // Salvando alteracoes
+            setFiles([...files])
+    
+            // salvando na localStorage
+            localStorage.setItem('files', JSON.stringify(files)) 
+    },[files])
 
     return(
         <section id="section__home">
