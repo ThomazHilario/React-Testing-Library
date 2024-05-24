@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 
-// import icons
-import { Heart, Trash2 } from 'lucide-react'
-
 // interface
 interface filesType{
     name:string,
-    date: string
+    date: number
 }
+
+// Post Component
+import { Post } from "../Post"
 
 // import css
 import './home.css'
@@ -41,21 +41,18 @@ export const Home = () => {
 
     return(
         <section id="section__home">
-            {files.length > 0 ? files.map((item, idx) => {
-                return(
-                    <div key={idx} className="files">
-                        <div>
-                            <p>{item.name}</p>
-                            <p>Create in {item.date}</p>
-                        </div>
-
-                        <div className="files__interaction">
-                            <Heart color="white"/>
-                            <Trash2 color="white" onClick={() => deleteFile(idx)}/>
-                        </div>
-                    </div>
-                )
-            }) : <h1>Nao tem nenhum file</h1>}
+            {
+                files.length > 0 ? files.map((file, idx) => {
+                    return(
+                        <Post 
+                            key={idx}
+                            nameFile={file.name} 
+                            dateFile={file.date } 
+                            deleteFile={() => deleteFile(idx)}
+                        />
+                    )
+                }) : <h1>Nao tem nenhum file</h1>
+            }
         </section>
     )
 }
