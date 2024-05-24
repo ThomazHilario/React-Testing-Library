@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 // interface
 interface filesType{
@@ -28,42 +28,19 @@ export const Home = () => {
     // files - state
     const [files, setFiles] = useState<filesType[]>([])
 
-    // deleteFile
-    const deleteFile = useCallback((index:number) => {  
-            // Removendo file
-            files?.splice(index,1)
-    
-            // Salvando alteracoes
-            setFiles([...files])
-    
-            // salvando na localStorage
-            localStorage.setItem('files', JSON.stringify(files)) 
-    },[files])
-
-    // favoriteFile
-    const updateValueIsFavoriteInFile = useCallback((index:number) => {
-        // logica para alterar o valor do favorite
-        files[index].isFavorite ? files[index].isFavorite = false : files[index].isFavorite = true 
-
-        // Salvando na localStorage
-        setFiles([...files])
-
-        // localStorage
-        localStorage.setItem('files', JSON.stringify(files))
-    },[files])
-
     return(
-        <section id="section__home">
+        <section className="container">
             {
                 files.length > 0 ? files.map((file, idx) => {
                     return(
                         <Post 
                             key={idx}
+                            index={idx}
                             nameFile={file.name} 
                             dateFile={file.date}
                             isFavorite={file.isFavorite}
-                            updateValueIsFavoriteInFile={() => updateValueIsFavoriteInFile(idx)} 
-                            deleteFile={() => deleteFile(idx)}
+                            files={files}
+                            setFiles={setFiles}
                         />
                     )
                 }) : <h1>Nao tem nenhum file</h1>
