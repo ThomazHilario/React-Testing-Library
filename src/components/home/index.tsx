@@ -43,7 +43,7 @@ export const Home = () => {
                             setFiles={setFiles}
                         />
                     )
-                }) : <h1>Nao tem nenhum file</h1>
+                }) : <h1>Não possui file!</h1>
             }
         </section>
     )

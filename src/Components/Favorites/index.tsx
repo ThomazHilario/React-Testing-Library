@@ -44,7 +44,7 @@ export const Favorites = () => {
                     files={files}
                     setFiles={setFiles}
                 />
-            }) : <h1>Nao tem nenhum file favoritado</h1>}
+            }) : <h1>Não possui file favoritos!</h1>}
         </div>
     )
 }
