@@ -39,3 +39,32 @@
 * Foco: Testar o fluxo completo do usuário.
 * Objetivo: Simular o comportamento real do usuário, incluindo interações com APIs e bancos de dados.
 * Característica: Incluem testes de agentes externos.
+
+
+# Configurando ambiente de testes em React + vite:
+
+## 1: Instale o jest usando: 
+``` npm install jest -d ```
+
+## 2: Depois crie um script de teste no package.json com o valor jest
+``` "test": "jest" ```
+
+## 3: Agora será necessário adicionar as dependências do testing-library:
+```` npm install  @testing-library/jest-dom @testing-library/react @testing-library/user-event -d ```
+
+## 4: Adicionar as dependências do Babel:
+``` npm install @babel/core @babel/preset-env @babel/preset-react babel-jest identity-obj-proxy jest-environment-jsdom -d ```
+
+## 5: Agora será necessário criar um arquivo chamado jest.config.js na raiz do projeto para configurar o jest:
+``` module.exports = { testEnvironment: 'jest-environment-jsdom', setupFilesAfterEnv: ['<rootDir>/.jest/setup-tests.ts'], moduleNameMapper: {'\\.(gif|ttf|eot|svg|png)$': '<rootDir>/.jest/mocks/fileMock.js', '\\.(css|less|sass|scss)$': 'identity-obj-proxy', },} ```
+
+## em seguida criar uma pasta .jest com o arquivo setup-tests. com o seguinte código:
+``` import '@testing-library/jest-dom' ```
+
+## 6: criar um arquivo chamado babel.config.json na raiz do projeto e adicionar o seguinte código:
+
+``` { "presets": [ ["@babel/preset-env", { "targets": { "esmodules": true } }], ["@babel/preset-react", { "runtime": "automatic" }] ] } ```
+
+## 7: Por ultimo criar uma pasta mocks, dentro da pasta .jest com um arquivo chamado fileMock.js que tem o seguinte código:
+
+``` module.exports = 'test-file-stub ```
