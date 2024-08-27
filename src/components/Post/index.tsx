@@ -52,7 +52,7 @@ export const Post = ({ index, nameFile, dateFile, isFavorite, files, setFiles }:
     const dateFormated = formatDistanceToNow(dateFile,{locale:ptBR, addSuffix:true})
 
     return(
-        <div className="files">
+        <div className="files" data-testid="files">
             <div>
                 <p>{nameFile}</p>
                 <p>Criado {dateFormated}</p>

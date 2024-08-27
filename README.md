@@ -68,3 +68,30 @@
 ## 7: Por ultimo criar uma pasta mocks, dentro da pasta .jest com um arquivo chamado fileMock.js que tem o seguinte código:
 
 ``` module.exports = 'test-file-stub ```
+
+
+# React + Typescript
+ - Para realizar os testes e necessário instalar algumas dependências:
+
+ ` npm i vitest @testing-library/react @testing-library/jest-dom jsdom @testing-library/dom`
+
+ - Depois de instalar as dependências é necessário deixar o vite.config.ts com aa seguinte configuração:
+
+ ` /// <reference types="vitest" /> `
+` /// <reference types="vite/client" /> `
+
+` import { defineConfig } from 'vite' `
+` import react from '@vitejs/plugin-react' `
+
+` // https://vitejs.dev/config/ `
+` export default defineConfig({ `
+  ` plugins: [react()], `
+  ` test:{ `
+    ` globals:true, `
+   ` environment:'jsdom' `
+`  } `
+` }) `
+
+- Por ultimo adicionar o script ` "test":"vitest" ` no package.json .
+
+- Pronto agora basta iniciar os seus testes.
